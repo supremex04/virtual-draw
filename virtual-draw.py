@@ -1,7 +1,7 @@
 import cv2 as cv
 import keyboard
 import numpy as np
-import time
+
 
 frameWidth = 640
 frameHeight = 480
@@ -9,6 +9,9 @@ cap = cv.VideoCapture(0)
 cap.set(3,frameWidth)
 cap.set(4, frameHeight)
 cap.set(10,100)      #10 is ID no. for brightness
+# Set the desired FPS
+desired_fps = 60  # Replace this with your desired FPS
+cap.set(cv.CAP_PROP_FPS, desired_fps)
 
 colors = [[49,120,62,179,255,255]]  
 points = []
@@ -44,7 +47,8 @@ def contourDetect(img):
 
 def draw(points):
         for point in points:
-            cv.circle(mirror, (point[0], point[1]), 10, (0,255,0), cv.FILLED)
+            cv.circle(mirror, (point[0], point[1]), 6, (0,255,0), cv.FILLED)
+
 
 while True:
     feedback, img = cap.read()
